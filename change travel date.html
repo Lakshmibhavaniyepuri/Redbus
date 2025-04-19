@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Travel Date | redBus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Section */
+        .header {
+            background-color: #d84e55;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .form-section {
+            flex: 1;
+            background-color: white;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-section {
+            flex: 1;
+        }
+        
+        h1 {
+            color: #d84e55;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin: 25px 0 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .phone-input {
+            display: flex;
+        }
+        
+        .country-code {
+            padding: 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-code select {
+            border: none;
+            background: transparent;
+            margin-left: 5px;
+            outline: none;
+        }
+        
+        .phone-number {
+            flex-grow: 1;
+            border-radius: 0 5px 5px 0;
+            border-left: none;
+        }
+        
+        .search-btn {
+            background-color: #d84e55;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .search-btn:hover {
+            background-color: #c23a42;
+        }
+        
+        .divider {
+            border-top: 1px solid #eee;
+            margin: 25px 0;
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            background-color: white;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .step-number {
+            background-color: #d84e55;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Footer Sections */
+        .footer-section {
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #d84e55;
+        }
+        
+        /* Footer Grid */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">redBus</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="form-section">
+                <h1>Change Travel Date</h1>
+                <p>Verify your details, and Change Travel Date</p>
+                
+                <form>
+                    <div class="form-group">
+                        <label>TICKET NUMBER</label>
+                        <input type="text" placeholder="Enter your ticket number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>MOBILE NUMBER</label>
+                        <div class="phone-input">
+                            <div class="country-code">
+                                +91
+                                <select>
+                                    <option>▼</option>
+                                </select>
+                            </div>
+                            <input type="tel" class="phone-number" placeholder="Enter your mobile number">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="search-btn">SEARCH</button>
+                </form>
+            </div>
+            
+            <div class="info-section">
+                <div class="how-it-works">
+                    <h2>How it works?</h2>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Search Ticket:</strong>
+                            <p>Enter your ticket number and Email id and search the ticket.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Choose Travel Date</strong>
+                            <p>Verify your ticket and choose a date to change your travel date.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Confirmation:</strong>
+                            <p>Select your bus and confirm date change by paying the difference amount.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-redbus">
+                    <p><strong>redBus</strong></p>
+                    <p>redBus is the world's largest online bus ticket booking service trusted by over 25 million happy customers globally. redBus offers bus ticket tickets.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>About redBus</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">redBus on mobile</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Info</h3>
+                <ul>
+                    <li><a href="#">T&C</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Bus operator registration</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Global Sites</h3>
+                <ul>
+                    <li><a href="#">India</a></li>
+                    <li><a href="#">Singapore</a></li>
+                    <li><a href="#">Malaysia</a></li>
+                    <li><a href="#">Indonesia</a></li>
+                    <li><a href="#">Peru</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Our Partners</h3>
+                <ul>
+                    <li><a href="#">Cobbbo Bus</a></li>
+                    <li><a href="#">Cobbbo Hotels</a></li>
+                    <li><a href="#">Makemytrip Hotels</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Smarter Way to Travel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+        }
+        
+        .login-header {
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            color: #333;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        
+        .login-header h1 span {
+            color: #d84e55;
+            font-weight: bold;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .login-header p strong {
+            color: #d84e55;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .phone-input {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .country-code {
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-code select {
+            border: none;
+            background: transparent;
+            margin-left: 5px;
+            outline: none;
+            color: #333;
+        }
+        
+        .phone-number {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: none;
+            border-left: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .generate-otp {
+            width: 100%;
+            padding: 14px;
+            background-color: #d84e55;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .generate-otp:hover {
+            background-color: #c23a42;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #999;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #eee;
+            z-index: -1;
+        }
+        
+        .divider span {
+            background-color: white;
+            padding: 0 15px;
+        }
+        
+        .social-login {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .social-login p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        
+        .google-btn:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .google-icon {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .terms {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+        
+        .terms a {
+            color: #d84e55;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Unlock the <span>Smarter Way to Travel</span></h1>
+            <p><strong>Sign in to avail exciting discounts and cashbacks!!</strong></p>
+        </div>
+        
+        <div class="form-group">
+            <div class="phone-input">
+                <div class="country-code">
+                    +91
+                    <select>
+                        <option>▼</option>
+                    </select>
+                </div>
+                <input type="tel" class="phone-number" placeholder="Enter your mobile number">
+            </div>
+        </div>
+        
+        <button class="generate-otp">GENERATE OTP (One Time Password)</button>
+        
+        <div class="divider">
+            <span>OR, Connect using social accounts</span>
+        </div>
+        
+        <div class="social-login">
+            <p>Sign in with Google</p>
+            <button class="google-btn">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.K-uOhjSRF7HHABUxkvYMogHaEk&pid=Api&P=0&h=180" alt="Google" class="google-icon">
+                Continue with Google
+            </button>
+        </div>
+        
+        <div class="terms">
+            By signing up, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</body>
+</html>

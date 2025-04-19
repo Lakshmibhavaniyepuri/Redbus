@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RedBus Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: url('https://in.images.search.yahoo.com/yhs/view;_ylt=AwrPrtE2fQJotFofzJAO9olQ;_ylu=c2VjA3NyBHNsawNpbWcEb2lkAzRjODJjZDM5MWVmZjZjNGE0NjJiNWNmNzJkY2ZiN2NmBGdwb3MDNQRpdANiaW5n?back=https%3A%2F%2Fin.images.search.yahoo.com%2Fyhs%2Fsearch%3Fp%3Dbus%2Bpng%2Bimage%26ei%3DUTF-8%26type%3Dtype80160-771431368%26fr%3Dyhs-sz-002%26hsimp%3Dyhs-002%26hspart%3Dsz%26param1%3D919493689%26tab%3Dorganic%26ri%3D5&w=1600&h=810&imgurl=pngimg.com%2Fuploads%2Fbus%2Fbus_PNG101203.png&rurl=https%3A%2F%2Fpngimg.com%2Fimage%2F101203&size=1051KB&p=bus+png+image&oid=4c82cd391eff6c4a462b5cf72dcfb7cf&fr2=&fr=yhs-sz-002&tt=Bus+PNG+transparent+image+download%2C+size%3A+1600x810px&b=0&ni=80&no=5&ts=&tab=organic&sigr=rn6G_sbknJDc&sigb=l38Kc07eGN3u&sigi=ckZ9r6eT1hNI&sigt=HqoQOZHKcebs&.crumb=.27PbTwu6Dr&fr=yhs-sz-002&hsimp=yhs-002&hspart=sz&type=type80160-771431368&param1=919493689') no-repeat center center/cover;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-button {
+      background: #d9534f;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .nav-button:hover {
+      background: #c12e2a;
+    }
+
+    .dropbtn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 200px;
+      border-radius: 8px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .language-dropdown .dropdown-content {
+      min-width: 150px;
+    }
+
+    .account-dropdown .dropdown-content {
+      min-width: 220px;
+    }
+
+    .account-dropdown .dropdown-content a:first-child {
+      font-weight: bold;
+      color: #d9534f;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    /* SEARCH BOX */
+    .search-box {
+      max-width: 1000px;
+      margin: 20px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 40px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      align-items: center;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      padding: 12px 20px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .search-box button:hover {
+      background-color: #c9302c;
+    }
+
+    /* PROMO SECTION */
+    .promo-section {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-content {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    
+    .text-content {
+      flex: 1;
+    }
+    
+    .image-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .image-controls {
+      background: #f5f5f5;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .image-controls label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .image-controls input[type="range"] {
+      width: 100px;
+    }
+    
+    #promoImage {
+      border-radius: 10px;
+      transition: width 0.3s, height 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 100%;
+    }
+    
+    @media (max-width: 768px) {
+      .promo-content {
+        flex-direction: column;
+      }
+      
+      .image-container {
+        width: 100%;
+      }
+      
+      #promoImage {
+        width: 100% !important;
+        height: auto !important;
+      }
+      
+      .image-controls {
+        display: none;
+      }
+    }
+
+    .promo-section h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #d9534f;
+    }
+
+    .promo-section h3 {
+      font-size: 22px;
+      margin: 20px 0 15px;
+      color: #333;
+    }
+
+    .promo-section p {
+      margin-bottom: 20px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .promo-features {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto 25px;
+    }
+
+    .promo-features li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .promo-features li:before {
+      content: "✓";
+      color: #5cb85c;
+      position: absolute;
+      left: 0;
+    }
+
+    .promo-button {
+      padding: 12px 30px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .promo-button:hover {
+      background-color: #c9302c;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 25px auto;
+      max-width: 600px;
+    }
+
+    /* APP DOWNLOAD SECTION */
+    .app-download {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: #ffebee;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .app-download h2 {
+      font-size: 28px;
+      color: #d9534f;
+      margin-bottom: 20px;
+    }
+
+    .app-features {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .app-features ul {
+      display: inline-block;
+      text-align: left;
+      margin: 0 auto;
+    }
+
+    .app-features li {
+      margin-bottom: 10px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .app-features li:before {
+      content: "✓";
+      color: #5cb85c;
+      position: absolute;
+      left: 0;
+    }
+
+    .app-stores {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .app-store {
+      text-align: center;
+      min-width: 150px;
+    }
+
+    .rating {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffc107;
+      margin-bottom: 5px;
+    }
+
+    .downloads {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .store-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .qr-code {
+      margin: 20px auto;
+      width: 150px;
+      height: 150px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .qr-code img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .store-button {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 150px;
+      transition: transform 0.2s;
+    }
+
+    .store-button:hover {
+      transform: scale(1.05);
+    }
+
+    .store-button span {
+      font-size: 12px;
+    }
+
+    .store-button .main-text {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section h2 {
+      font-size: 28px;
+      color: #d9534f;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .faq-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .faq-category {
+      background-color: #f8f9fa;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .faq-category:hover, .faq-category.active {
+      background-color: #d9534f;
+      color: white;
+    }
+
+    .faq-questions {
+      margin-top: 20px;
+    }
+
+    .faq-question {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .faq-question h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question h3:after {
+      content: "+";
+      font-size: 20px;
+    }
+
+    .faq-question.active h3:after {
+      content: "-";
+    }
+
+    .faq-answer {
+      display: none;
+      color: #666;
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+
+    .faq-question.active .faq-answer {
+      display: block;
+    }
+
+    /* POPULAR ROUTES SECTION */
+    .popular-section {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .popular-section h2 {
+      font-size: 28px;
+      color: #d9534f;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .popular-item {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .popular-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .popular-item h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .popular-item p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* FOOTER SECTION */
+    .footer-grid {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 40px 20px;
+      background-color: #2d2d2d;
+      color: white;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-section {
+      padding: 0 15px;
+    }
+
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #d9534f;
+    }
+
+    .footer-section ul {
+      list-style-type: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <div class="logo" onclick="window.location.href='index.html'">🚌 RedBus</div>
+      <button class="nav-button" onclick="window.location.href='index.html'">Bus Tickets</button>
+      <button class="nav-button" onclick="window.location.href='train.html'">Train Tickets</button>
+      
+    </div>
+    <div class="navbar-right">
+      <div class="dropdown language-dropdown">
+        <button class="dropbtn">🌐 English </button>
+        <div class="dropdown-content">
+          <a href="#" onclick="changeLanguage('en')">English</a>
+          <a href="#" onclick="changeLanguage('hi')">हिंदी</a>
+          <a href="#" onclick="changeLanguage('ta')">தமிழ்</a>
+          <a href="#" onclick="changeLanguage('te')">తెలుగు</a>
+          <a href="#" onclick="changeLanguage('ml')">മലയാളം</a>
+          <a href="#" onclick="changeLanguage('bn')">বাংলা</a>
+        </div>
+      </div>
+      <button class="dropbtn" onclick="window.location.href='help.html'">Help</button>
+      <button class="dropbtn" onclick="window.location.href='login.html'">Help</button>
+      <div class="dropdown account-dropdown">
+        <button class="dropbtn">👤 Account </button>
+        <div class="dropdown-content">
+          <a href="login.html">Login / Sign Up</a>
+          <a href="cancel.html">Cancel Ticket</a>
+          <a href="change travel date.html">Change Travel Date</a>
+          <a href="show my ticket.html">Show My Ticket</a>
+          <a href="email">Email/SMS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>India's No. 1 Online Bus Ticket Booking Site</h1>
+  </div>
+
+  <!-- SEARCH BOX -->
+  <div class="search-box">
+    <input type="text" id="fromInput" placeholder="From" />
+    <input type="text" id="toInput" placeholder="To" />
+    <input type="date" id="travelDate" />
+    <button onclick="searchRedirect()">Search Buses</button>
+  </div>
+
+  <!-- PROMO SECTION -->
+  <div class="promo-section">
+    <div class="promo-content">
+      <div class="text-content">
+        <h2>NOW, GET MORE THAN <strong>JUST BUS</strong> TICKETS WITH REDBUS!</h2>
+        
+        <h3>Train Tickets</h3>
+        <p>Book IRCTC Train Tickets on redRail simple & superfast booking process with no service fee + no payment gateway charge.</p>
+        
+        <div class="promo-features">
+          <h4>Authorised IRCTC Partner</h4>
+          <ul>
+            <li>Instant refunds on UPI payments</li>
+            <li>Hassle-free customer support</li>
+          </ul>
+        </div>
+        
+        <hr>
+        
+        <button class="promo-button" onclick="window.location.href='train.html'">Book Train Tickets</button>
+      </div>
+      
+      <div class="image-container">
+        <div class="image-controls">
+          <label for="imageWidth">Width</label>
+          <input type="range" id="imageWidth" min="200" max="500" value="350" step="10">
+          
+          <label for="imageHeight">Height</label>
+          <input type="range" id="imageHeight" min="150" max="400" value="250" step="10">
+        </div>
+        
+        <img src="https://www.gannett-cdn.com/-mm-/c5c20519e67a80995aae88c9a1c0ea2f63930a6/c=0-95-958-636/local/-/media/2018/04/23/USATODAY/USATODAY/636600838705972040-Amtrak-Passenger-Cars-For-USA-Today-Image-15-Amtrak-owned.jpg?width=3200&height=1680&fit=crop" 
+             alt="Amtrak Train" 
+             id="promoImage"
+             style="width: 350px; height: 250px; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+
+  <!-- APP DOWNLOAD SECTION -->
+  <div class="app-download">
+    <h2>ENJOY THE APP!</h2>
+    
+    <div class="app-features">
+      <ul>
+        <li>Quick access</li>
+        <li>Superior live tracking</li>
+      </ul>
+    </div>
+    
+    <div class="app-stores">
+      <div class="app-store">
+        <div class="rating">4.5 ★</div>
+        <div class="downloads">50M+ downloads</div>
+        <div class="store-name">Play Store</div>
+      </div>
+      
+      <div class="app-store">
+        <div class="rating">4.6 ★</div>
+        <div class="downloads">50M+ downloads</div>
+        <div class="store-name">App Store</div>
+      </div>
+    </div>
+    
+    <div class="qr-code">
+      <img src="https://m.media-amazon.com/images/I/51NPv2edAlL._AC_UL960_QL65_.png" alt="Download QR Code">
+    </div>
+    
+    <div>Download the App on</div>
+    
+    <div class="store-buttons">
+      <a href="https://play.google.com/store" class="store-button" target="_blank">
+        <span>GET IT ON</span>
+        <span class="main-text">Google Play</span>
+      </a>
+      
+      <a href="https://www.apple.com/app-store/" class="store-button" target="_blank">
+        <span>Download on the</span>
+        <span class="main-text">App Store</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <div class="faq-section">
+    <h2>FAQs related to Bus Tickets Booking</h2>
+    
+    <div class="faq-categories">
+      <div class="faq-category active" onclick="filterFAQs('general')">General</div>
+      <div class="faq-category" onclick="filterFAQs('ticket')">Ticket-related</div>
+      <div class="faq-category" onclick="filterFAQs('payment')">Payment</div>
+      <div class="faq-category" onclick="filterFAQs('cancellation')">Cancellation & Refund</div>
+    </div>
+    
+    <div class="faq-questions">
+      <div class="faq-question" data-category="general">
+        <h3>Can I track the location of my booked bus online?</h3>
+        <div class="faq-answer">
+          <p>Yes, you can track your bus in real-time using the redBus app or website if the bus operator has enabled this feature.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="general">
+        <h3>What are the advantages of purchasing a bus ticket with redBus?</h3>
+        <div class="faq-answer">
+          <p>redBus offers secure payment options, live tracking, multiple bus operator choices, discounts, and 24/7 customer support.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="general">
+        <h3>Why book bus tickets online on redBus?</h3>
+        <div class="faq-answer">
+          <p>Online booking saves time, offers better prices, provides seat selection, and allows easy cancellation and rescheduling.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="ticket">
+        <h3>Do I need to create an account on the redBus site to book my bus ticket?</h3>
+        <div class="faq-answer">
+          <p>No, you can book as a guest, but creating an account helps in managing bookings and accessing exclusive offers.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="payment">
+        <h3>Does bus booking online cost me more?</h3>
+        <div class="faq-answer">
+          <p>No, online booking often costs less due to discounts and eliminates the need to visit a physical booking counter.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="payment">
+        <h3>How can I get the discounts on the bus booking?</h3>
+        <div class="faq-answer">
+          <p>Use promo codes, check the 'Offers' section, or book during sale periods to avail discounts.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="general">
+        <h3>What's New in Bus Booking on redBus?</h3>
+        <div class="faq-answer">
+          <p>redBus regularly introduces features like live tracking, digital tickets, and improved search filters.</p>
+        </div>
+      </div>
+      
+      <div class="faq-question" data-category="ticket">
+        <h3>Can I book a Government bus ticket on redBus?</h3>
+        <div class="faq-answer">
+          <p>Yes, redBus partners with several government bus operators across India.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPULAR ROUTES SECTION -->
+  <div class="popular-section">
+    <h2>Popular Bus Routes</h2>
+    <div class="popular-grid">
+      <div class="popular-item" onclick="searchRoute('Bangalore', 'Chennai')">
+        <h3>Bangalore to Chennai</h3>
+        <p>350+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchRoute('Mumbai', 'Pune')">
+        <h3>Mumbai to Pune</h3>
+        <p>400+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchRoute('Delhi', 'Jaipur')">
+        <h3>Delhi to Jaipur</h3>
+        <p>300+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchRoute('Hyderabad', 'Vijayawada')">
+        <h3>Hyderabad to Vijayawada</h3>
+        <p>250+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchRoute('Kolkata', 'Durgapur')">
+        <h3>Kolkata to Durgapur</h3>
+        <p>200+ Buses Daily</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popular-section">
+    <h2>Popular Cities</h2>
+    <div class="popular-grid">
+      <div class="popular-item" onclick="searchCity('Bangalore')">
+        <h3>Bangalore</h3>
+        <p>1000+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchCity('Mumbai')">
+        <h3>Mumbai</h3>
+        <p>1200+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchCity('Delhi')">
+        <h3>Delhi</h3>
+        <p>1100+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchCity('Hyderabad')">
+        <h3>Hyderabad</h3>
+        <p>900+ Buses Daily</p>
+      </div>
+      <div class="popular-item" onclick="searchCity('Chennai')">
+        <h3>Chennai</h3>
+        <p>800+ Buses Daily</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popular-section">
+    <h2>Popular Bus Operators</h2>
+    <div class="popular-grid">
+      <div class="popular-item" onclick="searchOperator('KPN Travels')">
+        <h3>KPN Travels</h3>
+        <p>AC Sleeper & Seater</p>
+      </div>
+      <div class="popular-item" onclick="searchOperator('Orange Tours')">
+        <h3>Orange Tours</h3>
+        <p>Luxury Buses</p>
+      </div>
+      <div class="popular-item" onclick="searchOperator('VRL Travels')">
+        <h3>VRL Travels</h3>
+        <p>Premium Service</p>
+      </div>
+      <div class="popular-item" onclick="searchOperator('Morning Star')">
+        <h3>Morning Star</h3>
+        <p>Budget Travel</p>
+      </div>
+      <div class="popular-item" onclick="searchOperator('SRS Travels')">
+        <h3>SRS Travels</h3>
+        <p>Comfortable Rides</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SECTION -->
+  <div class="footer-grid">
+    <div class="footer-section">
+      <h3>About redBus</h3>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Investor Relations</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">redBus on mobile</a></li>
+        <li><a href="#">Sitemap</a></li>
+        <li><a href="#">Offers</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Values</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Info</h3>
+      <ul>
+        <li><a href="#">T&C</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Bus operator registration</a></li>
+        <li><a href="#">Agent registration</a></li>
+        <li><a href="#">Insurance partner</a></li>
+        <li><a href="#">User agreement</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Global Sites</h3>
+      <ul>
+        <li><a href="#">India</a></li>
+        <li><a href="#">Singapore</a></li>
+        <li><a href="#">Malaysia</a></li>
+        <li><a href="#">Indonesia</a></li>
+        <li><a href="#">Peru</a></li>
+        <li><a href="#">Colombia</a></li>
+        <li><a href="#">Cambodia</a></li>
+        <li><a href="#">Vietnam</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Our Partners</h3>
+      <ul>
+        <li><a href="#">Colbibo Bus</a></li>
+        <li><a href="#">Colbibo Hotels</a></li>
+        <li><a href="#">Makemytrin Hotels</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Search redirection function
+    function searchRedirect() {
+      const from = document.getElementById('fromInput').value;
+      const to = document.getElementById('toInput').value;
+      const date = document.getElementById('travelDate').value;
+      
+      if (from && to && date) {
+        // Encode the values for URL
+        const encodedFrom = encodeURIComponent(from);
+        const encodedTo = encodeURIComponent(to);
+        const encodedDate = encodeURIComponent(date);
+        
+        // Redirect to search results page with parameters
+        window.location.href = `search-results.html?from=${encodedFrom}&to=${encodedTo}&date=${encodedDate}`;
+      } else {
+        alert("Please fill all fields!");
+      }
+    }
+
+    // Popular route search
+    function searchRoute(from, to) {
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      
+      const formattedDate = tomorrow.toISOString().split('T')[0];
+      window.location.href = `search-results.html?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${formattedDate}`;
+    }
+
+    // Popular city search
+    function searchCity(city) {
+      window.location.href = `city-buses.html?city=${encodeURIComponent(city)}`;
+    }
+
+    // Popular operator search
+    function searchOperator(operator) {
+      window.location.href = `operator-buses.html?operator=${encodeURIComponent(operator)}`;
+    }
+
+    // Language change function
+    function changeLanguage(lang) {
+      // Here you would typically set a cookie or localStorage
+      localStorage.setItem('preferredLanguage', lang);
+      alert(`Language changed to ${lang}. In a real app, this would reload the page with translated content.`);
+      // window.location.reload();
+    }
+
+    // Image size adjustment controls
+    const widthSlider = document.getElementById('imageWidth');
+    const heightSlider = document.getElementById('imageHeight');
+    const promoImage = document.getElementById('promoImage');
+
+    widthSlider.addEventListener('input', function() {
+      promoImage.style.width = this.value + 'px';
+    });
+
+    heightSlider.addEventListener('input', function() {
+      promoImage.style.height = this.value + 'px';
+    });
+
+    // FAQ functionality
+    function filterFAQs(category) {
+      // Update active category
+      document.querySelectorAll('.faq-category').forEach(cat => {
+        cat.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Filter questions
+      document.querySelectorAll('.faq-question').forEach(question => {
+        if (category === 'general' || question.dataset.category === category) {
+          question.style.display = 'block';
+        } else {
+          question.style.display = 'none';
+        }
+      });
+    }
+
+    // Toggle FAQ answers
+    document.querySelectorAll('.faq-question h3').forEach(header => {
+      header.addEventListener('click', function() {
+        const question = this.parentElement;
+        question.classList.toggle('active');
+      });
+    });
+
+    // Set default date to tomorrow
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('travelDate').valueAsDate = tomorrow;
+  </script>
+</body>
+</html>

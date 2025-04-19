@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNR Status Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('https://tse1.mm.bing.net/th?id=OIP.m8_w9eJ-PF3jfhyYheB5RAHaDU&pid=Api&P=0&h=180');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .breadcrumb {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1, h2 {
+            color: #333;
+            margin-bottom: 20px;
+            background-color: transparent;
+            padding: 5px 0;
+        }
+        
+        h1 {
+            font-size: 24px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .authorized {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 30px;
+            background-color: transparent;
+        }
+        
+        .options {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: transparent;
+        }
+        
+        .option {
+            padding: 10px 15px;
+            margin-right: 15px;
+            background-color: transparent;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        
+        .option:hover {
+            background-color: rgba(224, 224, 224, 0.3);
+        }
+        
+        .pnr-form {
+            background-color: transparent;
+            padding: 20px 0;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 30px;
+        }
+        
+        .pnr-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            background-color: transparent;
+        }
+        
+        .pnr-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(204, 204, 204, 0.5);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .pnr-form button {
+            background-color: rgba(255, 102, 0, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .pnr-form button:hover {
+            background-color: rgba(230, 92, 0, 0.8);
+        }
+        
+        .features {
+            background-color: rgba(255, 245, 245, 0.7);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid rgba(255, 102, 0, 0.7);
+        }
+        
+        .train-list {
+            margin-top: 30px;
+        }
+        
+        .train-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .train-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .train-number {
+            font-weight: bold;
+            color: #d50000;
+        }
+        
+        .train-name {
+            font-weight: bold;
+        }
+        
+        .train-days {
+            display: flex;
+            gap: 5px;
+            margin: 5px 0;
+        }
+        
+        .train-day {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background-color: #f0f0f0;
+        }
+        
+        .train-classes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 5px 0;
+        }
+        
+        .train-class {
+            padding: 2px 5px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .train-schedule {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        
+        .train-departure, .train-arrival {
+            text-align: center;
+        }
+        
+        .train-time {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .train-station {
+            font-size: 14px;
+        }
+        
+        .train-duration {
+            text-align: center;
+            align-self: center;
+            font-size: 14px;
+        }
+        
+        .availability-btn {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .availability-btn:hover {
+            background-color: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            Home > Trains > PNR Status
+        </div>
+        
+        <h1>Check Live Train Status</h1>
+        
+        <div class="authorized">
+            Authorised by IRCTC
+        </div>
+        
+        <div class="options">
+            <div class="option">Book Train tickets</div>
+            <div class="option">Check PNR Status</div>
+            <div class="option">Live Train Status</div>
+        </div>
+        
+        <div class="pnr-form">
+            <label for="pnr">Enter PNR Number</label>
+            <input type="text" id="pnr" placeholder="Enter 10 digit PNR number">
+            <button>Check Status</button>
+        </div>
+        
+        <div class="features">
+            <h2>Top 10 trains with highest searches for train status</h2>
+            
+            <div class="train-list">
+                <!-- Train 1 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">12562</span>
+                        <span class="train-name">SWTANTRTA S EXP</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">SLRD</span>
+                        <span class="train-class">GEN</span>
+                        <span class="train-class">SL</span>
+                        <span class="train-class">PC</span>
+                        <span class="train-class">3E</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">1A</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">7:25 PM</div>
+                            <div class="train-station">NEW DELHI (NDLS)</div>
+                        </div>
+                        <div class="train-duration">22 h 17 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">9:15 PM</div>
+                            <div class="train-station">JAYNAGAR (JYG)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 2 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">11013</span>
+                        <span class="train-name">LTT CBE EXPRESS</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">1A</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">SL</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">6:50 AM</div>
+                            <div class="train-station">LOKMANYATILAK T (LTT)</div>
+                        </div>
+                        <div class="train-duration">32 h 25 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">10:35 PM</div>
+                            <div class="train-station">COIMBATORE JN (CBE)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 3 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">12551</span>
+                        <span class="train-name">SMVB KYQ AC EXP</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">3A</span>
+                        <span class="train-class">PC</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">1A</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">1:45 PM</div>
+                            <div class="train-station">SMVT BENGALURU (SMVB)</div>
+                        </div>
+                        <div class="train-duration">52 h 92 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">8:50 AM</div>
+                            <div class="train-station">KAMAKHYA (KYQ)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 4 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">15715</span>
+                        <span class="train-name">GARIB NAWAZ EXP</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">SLRD</span>
+                        <span class="train-class">GEN</span>
+                        <span class="train-class">1A+3A</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">SL</span>
+                        <span class="train-class">SLR</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">9:30 PM</div>
+                            <div class="train-station">KISHANGANJ (KNE)</div>
+                        </div>
+                        <div class="train-duration">39 h 67 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">5:50 AM</div>
+                            <div class="train-station">AJMER JN (AII)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 5 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">12509</span>
+                        <span class="train-name">GUWAHATI EXP</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">GEN</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">SL</span>
+                        <span class="train-class">PC</span>
+                        <span class="train-class">SLRD</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">4:50 AM</div>
+                            <div class="train-station">SMVT BENGALURU (SMVB)</div>
+                        </div>
+                        <div class="train-duration">53 h 17 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">11:40 PM</div>
+                            <div class="train-station">GUWAHATI (GHY)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 6 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">19038</span>
+                        <span class="train-name">AVADH EXPRESS</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">1A+2A</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">3E</span>
+                        <span class="train-class">PC</span>
+                        <span class="train-class">SL</span>
+                        <span class="train-class">GEN</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">4:05 AM</div>
+                            <div class="train-station">BARAUNI JN (BJU)</div>
+                        </div>
+                        <div class="train-duration">44 h 75 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">7:20 AM</div>
+                            <div class="train-station">BANDRA TERMINUS (BDTS)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 7 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">22161</span>
+                        <span class="train-name">RAJYARANI EXP</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">GEN</span>
+                        <span class="train-class">2S</span>
+                        <span class="train-class">CC</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">11:00 PM</div>
+                            <div class="train-station">BHOPAL JN (BPL)</div>
+                        </div>
+                        <div class="train-duration">5 h 08 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">5:55 PM</div>
+                            <div class="train-station">DAMOH (DMO)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 8 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">15017</span>
+                        <span class="train-name">LTT GKP EXPRESS</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">GEN</span>
+                        <span class="train-class">SL</span>
+                        <span class="train-class">3A</span>
+                        <span class="train-class">2A</span>
+                        <span class="train-class">1A</span>
+                        <span class="train-class">PC</span>
+                        <span class="train-class">SLRD</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">6:55 PM</div>
+                            <div class="train-station">LOKMANYATILAK T (LTT)</div>
+                        </div>
+                        <div class="train-duration">36 h 33 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">6:35 AM</div>
+                            <div class="train-station">GORAKHPUR JN (GKP)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 9 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">05577</span>
+                        <span class="train-name">SHC ANVT GR SPL</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">3A</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">12:30 AM</div>
+                            <div class="train-station">SAHARSA JN (SHC)</div>
+                        </div>
+                        <div class="train-duration">28 h 5 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">8:00 PM</div>
+                            <div class="train-station">ANAND VIHAR TRM (ANVT)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+                
+                <!-- Train 10 -->
+                <div class="train-card">
+                    <div class="train-header">
+                        <span class="train-number">22410</span>
+                        <span class="train-name">GAYA GARIB RATH</span>
+                    </div>
+                    <div class="train-days">
+                        <span class="train-day">M</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">W</span>
+                        <span class="train-day">T</span>
+                        <span class="train-day">F</span>
+                        <span class="train-day">S</span>
+                        <span class="train-day">S</span>
+                    </div>
+                    <div class="train-classes">
+                        <span class="train-class">3E</span>
+                    </div>
+                    <div class="train-schedule">
+                        <div class="train-departure">
+                            <div class="train-time">9:45 AM</div>
+                            <div class="train-station">ANAND VIHAR TRM (ANVT)</div>
+                        </div>
+                        <div class="train-duration">13 h 42 min</div>
+                        <div class="train-arrival">
+                            <div class="train-time">8:20 PM</div>
+                            <div class="train-station">GAYA JN (GAYA)</div>
+                        </div>
+                    </div>
+                    <button class="availability-btn pulse">Show Availability</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

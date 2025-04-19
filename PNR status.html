@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNR Status Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('https://tse1.mm.bing.net/th?id=OIP.m8_w9eJ-PF3jfhyYheB5RAHaDU&pid=Api&P=0&h=180');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .breadcrumb {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            background-color: transparent; /* No background */
+            padding: 5px 0;
+        }
+        
+        .authorized {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 30px;
+            background-color: transparent; /* No background */
+        }
+        
+        .options {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: transparent; /* No background */
+        }
+        
+        .option {
+            padding: 10px 15px;
+            margin-right: 15px;
+            background-color: transparent; /* No background */
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.2); /* Light border for visibility */
+            color: #333; /* Ensure text is visible */
+        }
+        
+        .option:hover {
+            background-color: rgba(224, 224, 224, 0.3); /* Slight hover effect */
+        }
+        
+        .pnr-form {
+            background-color: transparent; /* No background */
+            padding: 20px 0; /* Reduced padding */
+            border-radius: 6px;
+            border: none; /* No border */
+            margin-bottom: 30px;
+        }
+        
+        .pnr-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            background-color: transparent; /* No background */
+        }
+        
+        .pnr-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(204, 204, 204, 0.5);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque for usability */
+        }
+        
+        .pnr-form button {
+            background-color: rgba(255, 102, 0, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .pnr-form button:hover {
+            background-color: rgba(230, 92, 0, 0.8);
+        }
+        
+        .features {
+            background-color: rgba(255, 245, 245, 0.7);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid rgba(255, 102, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            Home > Trains > PNR Status
+        </div>
+        
+        <h1>Check PNR Status</h1>
+        
+        <div class="authorized">
+            Authorised by IRCTC
+        </div>
+        
+        <div class="options">
+            <div class="option">Book Train tickets</div>
+            <div class="option">Check PNR Status</div>
+            <div class="option">Live Train Status</div>
+        </div>
+        
+        <div class="pnr-form">
+            <label for="pnr">Enter PNR Number</label>
+            <input type="text" id="pnr" placeholder="Enter 10 digit PNR number">
+            <button>Check Status</button>
+        </div>
+        
+        <div class="features">
+            <h2>Key Features of redRail PNR Status Check</h2>
+            <h3>redRail by redBus PNR Status check offers the following features for passengers:</h3>
+            <ul>
+                <li>redRail provides timely updates about train names & numbers, boarding dates, and departure times.</li>
+                <li>As an authorized partner of IRCTC, redRail ensures the accuracy of the information provided to you.</li>
+                <li>With a single PNR search, you can see the information of all passengers booked under one PNR search.</li>
+                <li>Having the current and accurate status of your train and the ticket enables better journey management and reduces inconvenience.</li>
+                <li>Additionally, you would also get to view the fare and transaction details.</li>
+                <li>redRail provides regular updates on your PNR number IRCTC status on your WhatsApp.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

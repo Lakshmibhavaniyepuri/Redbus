@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticket Booking | IRCTC Authorised Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #d84e55, #a83238);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        /* Main Content */
+        .booking-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .booking-header {
+            padding: 25px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .booking-header h1 {
+            color: #d84e55;
+            font-size: 28px;
+            margin-bottom: 5px;
+            animation: slideInLeft 0.6s ease-out;
+        }
+        
+        .booking-header h2 {
+            color: #495057;
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 15px;
+            animation: slideInLeft 0.7s ease-out;
+        }
+        
+        .booking-header p {
+            color: #6c757d;
+            font-size: 16px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #d84e55;
+            box-shadow: 0 0 0 0.2rem rgba(216, 78, 85, 0.25);
+            outline: none;
+        }
+        
+        .date-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .date-option {
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .date-option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .date-option.active {
+            background-color: #d84e55;
+            color: white;
+            border-color: #d84e55;
+        }
+        
+        .cancellation-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .cancellation-info i {
+            color: #28a745;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #dee2e6;
+            margin: 20px 0;
+            animation: expandWidth 0.8s ease-out;
+        }
+        
+        /* Search Button */
+        .search-btn {
+            background-color: #d84e55;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            animation: pulse 2s infinite;
+        }
+        
+        .search-btn:hover {
+            background-color: #c23a42;
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Quick Links with Animations */
+        .quick-links {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .quick-link {
+            text-align: center;
+            padding: 15px;
+            min-width: 150px;
+            transition: all 0.3s ease;
+            animation: bounceIn 0.8s ease-out;
+            transform-origin: bottom;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .quick-link i {
+            font-size: 28px;
+            color: #d84e55;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-link:hover i {
+            transform: rotate(10deg);
+            color: #a83238;
+        }
+        
+        .quick-link p {
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-link:hover p {
+            color: #d84e55;
+        }
+        
+        /* Link Styling */
+        .quick-link a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin: 40px auto;
+            padding: 30px 0;
+            width: 80%;
+        }
+        
+        .video-section h2 {
+            text-align: center;
+            color: #d84e55;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* About IRCTC Section */
+        .about-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+        
+        .about-section h2 {
+            color: #d84e55;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .about-section p {
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quick-link {
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-section, .about-section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-train"></i>
+                Train Ticket Booking
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="booking-container">
+            <div class="booking-header">
+                <h1>Train Ticket Booking</h1>
+                <h2>IRCTC Authorised Partner</h2>
+                <p>Bookings open for summer holidays</p>
+            </div>
+            
+            <div class="booking-form">
+                <div class="form-group">
+                    <label>From</label>
+                    <input type="text" class="form-control" placeholder="Enter source station">
+                </div>
+                
+                <div class="form-group">
+                    <label>To</label>
+                    <input type="text" class="form-control" placeholder="Enter destination station">
+                </div>
+                
+                <div class="form-group">
+                    <label>Date of Journey</label>
+                    <input type="date" class="form-control" id="journey-date">
+                
+                    <div class="date-options">
+                        <div class="date-option" onclick="setDateOption(0)">Today</div>
+                        <div class="date-option" onclick="setDateOption(1)">Tomorrow</div>
+                        <div class="date-option" onclick="setDateOption(2)">Day After</div>
+                    </div>
+                
+                    <div class="cancellation-info">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free Cancellation • No cancellation fee</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <button class="search-btn">Search Trains</button>
+            
+            <div class="quick-links">
+                <div class="quick-link" style="animation-delay: 0.1s">
+                    <a href="PNR status.html">
+                        <i class="fas fa-ticket-alt"></i>
+                        <p>Check PNR Status</p> 
+                    </a>
+                </div>
+                <div class="quick-link" style="animation-delay: 0.2s">
+                    <a href="livetrain.html">
+                        <i class="fas fa-subway"></i>
+                        <p>Live Train Status</p> 
+                    </a>
+                </div>
+                <div class="quick-link" style="animation-delay: 0.3s">
+                    <a href="order food.html">
+                        <i class="fas fa-utensils"></i>
+                        <p>Order Food</p>
+                    </a>
+                </div>
+                <div class="quick-link" style="animation-delay: 0.4s">
+                    <a href="Grievance.html">
+                        <i class="fas fa-headset"></i>
+                        <p>Rail Madad</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Video Section -->
+        <div class="video-section">
+            <h2>Explore Indian Railways</h2>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/S6KFnlwfnQI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/KAbf1qWIL3U" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/FdOlQxl4uyE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About IRCTC Section -->
+        <div class="about-section">
+            <h2>About IRCTC</h2>
+            <p>IRCTC (Indian Railway Catering and Tourism Corporation) is a subsidiary of the Indian Railways and is responsible for managing online train ticket booking, catering services, and tourism activities. IRCTC was established in 1999 to improve the passenger experience and provide modern and efficient services to Indian railway users.</p>
+            
+            <p>IRCTC is the official website of the Indian Railways for online train ticket booking, which allows users to book train tickets, check seat availability, and access various other travel-related services.</p>
+            
+            <p>Millions of users use the IRCTC ticket booking platform to book train tickets. If you haven't registered with IRCTC, all you have to do is visit the official website, click on the register link, fill in the basic, personal and address information, and click on the register button. Once the registration is completed, you will get a pop-up message asking if the email and mobile number you entered are correct. Click on the ok button to complete the registration process.</p>
+            
+            <p>Besides train booking, IRCTC next generation ticket booking platform manages other services such as catering, tourism, and online shopping. It operates a chain of food plazas and restaurants across various railway stations in India, providing quality food and beverages to railway passengers.</p>
+            
+            <p>IRCTC has played a significant role in modernising the Indian Railways and improving the passenger experience by providing a range of services and facilities to millions of Indian railway users.</p>
+            
+            <p>IRCTC has partnered with redBus to facilitate train ticket booking via redRail. To book train tickets, you must have an IRCTC account. If not, it is recommended that one be created. Note that the IRCTC registration is free and requires a mobile number and email ID to create the account. Check the stepwise process to create IRCTC login credentials.</p>
+        </div>
+    </div>
+
+    <script>
+        function setDateOption(offset) {
+            const today = new Date();
+            today.setDate(today.getDate() + offset);
+            const formattedDate = today.toISOString().split('T')[0]; // format: YYYY-MM-DD
+            document.getElementById("journey-date").value = formattedDate;
+    
+            // Optional: highlight selected option
+            document.querySelectorAll('.date-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.date-option')[offset].classList.add('active');
+        }
+    
+        // Set default to Today
+        window.onload = () => setDateOption(0);
+    </script>
+</body>
+</html>
